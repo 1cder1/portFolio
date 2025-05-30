@@ -33,3 +33,40 @@ button {
 
 
 }
+
+.slider{
+    position: relative;
+    width: 95%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider img{
+    width: 100%;
+    display: none;
+
+
+}
+
+img.displaySlide{
+    display:block;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+
+
+.previous{
+    position: absolute;
+    left: 0;
+
+}
+
+.next{
+    right: 0;
+}
+
+@keyframes fade {
+    from {opacity: .7}
+    to {opacity: 1}
+}
