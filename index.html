@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
-    #mydiv{
-        position: absolute;
-        top: 300px;
-        left: 500px;
-        z-index: 9;
-        background-color: rgb(217, 226, 226);
-        text-align: center;
-        border: 1px solid;
-    }
+#mydiv {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, 0); /* Moves it back by half its own width */
+    z-index: 9;
+    background-color: rgb(217, 226, 226);
+    text-align: center;
+    border: 1px solid;
+}
     #mydivheader{
         padding: 10px;
         cursor: move;
@@ -41,9 +42,18 @@
 
     <div id="aboutMeDiv" class="popup">
         <div id="mydivheader">───── ❝ About ❞ ─────</div>
-        <h2>Get To Know Me</h2>
-        <p>Lalala this is all about me and what i injoy.</p>
-        
+        <div class="content">
+            <br>
+            <div class="text">
+                <h2>Get To Know Me</h2>
+                <p>Lalala this is all about me and what I enjoy.</p>
+
+            </div>
+            <div class="image">
+                <br>
+                <img src="ProfileTest.gif" width="200" height="200" alt="Profile">
+            </div>
+        </div>
         <button onclick="soundButton(), aboutClosePopUp()">Close</button>
     </div>
 

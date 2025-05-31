@@ -2,7 +2,7 @@
 
 body {
     font-family: sans-serif;
-
+    background-image: url('ProfileTest.gif');
 
 
 }
@@ -16,13 +16,36 @@ button {
 
 .popup {
         position: absolute;
-        top: 300px;
+        top: 500px;
         left: 500px;
         z-index: 9;
         background-color: rgb(217, 226, 226);
         text-align: center;
         border: 1px solid;
         display: none;
+}
+
+
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text {
+    width: 50%;
+}
+
+.image {
+    
+    width: 50%;
+    text-align: center;
+}
+
+.image img {
+    max-width: 100%;
+    height: auto;
+    bottom: 20px;
 }
 
 .playButton {
