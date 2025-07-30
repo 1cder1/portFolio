@@ -10,6 +10,7 @@ body {
 }
 
 button {
+    cursor: pointer;
     padding: 10px 20px;
     font-family: sans-serif;
     font-size: 20px;
@@ -95,3 +96,4 @@ img.displaySlide{
     from {opacity: .7}
     to {opacity: 1}
 }
+

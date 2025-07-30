@@ -168,3 +168,4 @@ function nextSlide(){
     slideIndex++;
     showSlide(slideIndex);
 }
+
