@@ -1,99 +1,90 @@
-
-
 body {
-    font-family: sans-serif;
-    background-image: url('backgroundMaybe.gif');
-    background-size: cover; /* Ensures the image covers the entire screen */
-    background-repeat: no-repeat; /* Prevents the image from duplicating */
-    background-position: center; /* Centers the image */
-    height: 100vh; /* Makes sure body covers the full viewport */
-}
-
-button {
-    cursor: pointer;
-    padding: 10px 20px;
-    font-family: sans-serif;
-    font-size: 20px;
-
-}
-
-.popup {
-        position: absolute;
-        top: 500px;
-        left: 500px;
-        z-index: 9;
-        background-color: rgb(217, 226, 226);
-        text-align: center;
-        border: 1px solid;
-        display: none;
-}
-
-
-.content {
+    margin: 0;
+    height: 100vh;
+    background: url('IMG/ProfileBK.gif') center/cover no-repeat;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-
-.text {
-    width: 50%;
-}
-
-.image {
-    
-    width: 50%;
+    justify-content: center;
     text-align: center;
+    font-family: sans-serif;
 }
 
-.image img {
-    max-width: 100%;
-    height: auto;
-    bottom: 20px;
-}
 
-.playButton {
-    position: absolute;
+.music-control {
+    position:fixed;
     bottom: 20px;
     right: 20px;
-
-
-
+    z-index:10;
 }
 
-.slider{
-    position: relative;
-    width: 95%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.slider img{
-    width: 100%;
-    display: none;
-
-
-}
-
-img.displaySlide{
-    display:block;
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-
-
-.previous{
+.page img{
+    cursor: grab;
     position: absolute;
-    left: 0;
+
 
 }
 
-.next{
-    right: 0;
+.img-welcome{
+    width: 25%;
+    height: auto;
+    max-width: 360px;
+    z-index: 1;
 }
 
-@keyframes fade {
-    from {opacity: .7}
-    to {opacity: 1}
+.img-about{
+
+    height: auto;
+    max-width: 500px;
+    z-index: 3;
 }
+
+.img-work{
+
+    height: auto;
+    max-width: 605px;
+    z-index: 4;
+}
+
+
+
+
+.welcome-content {
+  position: absolute; /* moves with img-welcome */
+  pointer-events: none;
+  user-select: none;
+  width: 150px; /* enough to contain both profile and exit */
+  height: 150px; /* adjust to fit your layout */
+  z-index: 2;
+}
+
+.welcome-content .profile {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170px;
+  height: auto;
+}
+
+.welcome-content .welcome-exit {
+  position: absolute; /* absolute to place it anywhere inside welcome-content */
+  top: -100px;          /* for example, near the top */
+  right: -85px;        /* for example, near the right */
+  pointer-events: auto; /* clickable */
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+}
+
+
+
+
+.page {
+  position: relative;
+  width: 100vw;   /* viewport width */
+  height: 100vh;  /* viewport height */
+  overflow: hidden;
+  border: none; /* optional */
+}
+
 

@@ -1,171 +1,71 @@
-function soundButton() {
-    const clickSound = new Audio("mouseClick.mp3");
-    clickSound.volume = 0.5;
-    clickSound.play();
-}
+const container = document.querySelector('.page');
+const imgs = container.querySelectorAll('img');
 
-dragElement(document.getElementById("mydiv"));
+imgs.forEach(img => {
+  img.style.position = 'absolute';
+  img.style.left ||= '100px';
+  img.style.top ||= '100px';
+  img.style.cursor = 'grab';
 
-function dragElement(elmnt) {
-    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-
-    if (document.getElementById(elmnt.id + "header")) {
-        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
-    } else {
-        elmnt.onmousedown = dragMouseDown;
-    }
-
-    function dragMouseDown(e) {
-        e = e || window.event;
-        e.preventDefault();
-
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-
-        document.onmouseup = closeDragElement;
-        document.onmousemove = elementDrag;
-    }
-
-function elementDrag(e) {
-    e = e || window.event;
+  img.onmousedown = e => {
     e.preventDefault();
+    img.style.cursor = 'grabbing';
 
-    pos1 = pos3 - e.clientX;
-    pos2 = pos4 - e.clientY;
-    pos3 = e.clientX;
-    pos4 = e.clientY;
+    const containerRect = container.getBoundingClientRect();
+    const imgRect = img.getBoundingClientRect();
 
+    const shiftX = e.clientX - imgRect.left;
+    const shiftY = e.clientY - imgRect.top;
 
-    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    function moveAt(pageX, pageY) {
+      let newLeft = pageX - containerRect.left - shiftX;
+      let newTop = pageY - containerRect.top - shiftY;
 
+      // Keep inside container
+      newLeft = Math.min(Math.max(0, newLeft), container.clientWidth - img.offsetWidth);
+      newTop = Math.min(Math.max(0, newTop), container.clientHeight - img.offsetHeight);
 
-    let clone = elmnt.cloneNode(true);
-    clone.style.position = "absolute";
-    clone.style.top = elmnt.style.top;
-    clone.style.left = elmnt.style.left;
-    clone.style.opacity = "1";
-    document.body.appendChild(clone);
+      img.style.left = newLeft + 'px';
+      img.style.top = newTop + 'px';
 
-    setTimeout(() => {
-        clone.remove();
-    }, 50);
-}
-    function closeDragElement() {
-        document.onmouseup = null;
-        document.onmousemove = null;
-    }
-}
-
-function showAboutMe() {
-    let aboutMeDiv = document.getElementById("aboutMeDiv");
-    aboutMeDiv.style.display = "block";
-    dragElement(aboutMeDiv);
-}
-
-function showLinks() {
-    let aboutMeDiv = document.getElementById("linksDiv");
-    aboutMeDiv.style.display = "block";
-    dragElement(aboutMeDiv);
-}
-
-function showWork() {
-    let aboutMeDiv = document.getElementById("workDiv");
-    aboutMeDiv.style.display = "block";
-    dragElement(aboutMeDiv);
-}
-
-function showContact() {
-    let aboutMeDiv = document.getElementById("contactDiv");
-    aboutMeDiv.style.display = "block";
-    dragElement(aboutMeDiv);
-}
-
-
-function aboutClosePopUp() {
-
-    document.getElementById("aboutMeDiv").style.display = "none";
-}
-
-function linksClosePopUp() {
-
-    document.getElementById("linksDiv").style.display = "none";
-}
-
-function workClosePopUp() {
-
-    document.getElementById("workDiv").style.display = "none";
-}
-
-
-function contactClosePopUp() {
-
-    document.getElementById("contactDiv").style.display = "none";
-}
-
-let audio = new Audio('backgroundMusic.mp3');
-audio.loop = true;
-let isPlaying = false;
-
-function playBkMusic() {
-    if (!isPlaying) {
-        audio.volume = 0;
-        audio.play();
-        let fadeIn = setInterval(() => {
-            if (audio.volume < 1) {
-                audio.volume = Math.min(audio.volume + 0.05, 1);
-            } else {
-                clearInterval(fadeIn);
-            }
-        }, 100);
-    } else {
-        let fadeOut = setInterval(() => {
-            if (audio.volume > 0) {
-                audio.volume = Math.max(audio.volume - 0.05, 0);
-            } else {
-                clearInterval(fadeOut);
-                audio.pause();
-            }
-        }, 100);
-    }
-    isPlaying = !isPlaying;
-}
-
-const slides = document.querySelectorAll(".slides img");
-let slideIndex = 0;
-let indervalId = null;
-
-initializeSlider();
-function initializeSlider(){
-
-    if(slides.length > 0 ) {
-        slides[slideIndex].classList.add("displaySlide");
+      // If it's the welcome image, reposition welcomeContent
+      if (img.classList.contains('img-welcome')) {
+        positionWelcomeContent();
+      }
     }
 
-}
-
-function showSlide(index){
-
-    if(index >= slides.length){
-        slideIndex = 0;
-    } else if(index < 0) {
-        slideIndex = slides.length - 1;
+    function onMouseMove(e) {
+      moveAt(e.pageX, e.pageY);
     }
 
+    moveAt(e.pageX, e.pageY);
 
-    slides.forEach(slide => {
-        slide.classList.remove("displaySlide");
-    });
-    slides[slideIndex].classList.add("displaySlide");
+    document.addEventListener('mousemove', onMouseMove);
+
+    document.onmouseup = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.onmouseup = null;
+      img.style.cursor = 'grab';
+    };
+  };
+
+  img.ondragstart = () => false;
+});
+
+// Keep your existing positionWelcomeContent() function and call it inside the loop for .img-welcome
+
+function positionWelcomeContent() {
+  const welcomeImg = container.querySelector('.img-welcome');
+  const welcomeContent = document.querySelector('.welcome-content');
+  const imgRect = welcomeImg.getBoundingClientRect();
+  const containerRect = container.getBoundingClientRect();
+
+  const centerX = imgRect.left - containerRect.left + imgRect.width / 2;
+  const centerY = imgRect.top - containerRect.top + imgRect.height / 2;
+
+  welcomeContent.style.left = (centerX - welcomeContent.offsetWidth / 2) + 'px';
+  welcomeContent.style.top = (centerY - welcomeContent.offsetHeight / 2) + 'px';
 }
 
-function prevSlide(){
-    slideIndex--;
-    showSlide(slideIndex);
-}
-
-function nextSlide(){
-    slideIndex++;
-    showSlide(slideIndex);
-}
-
+// Initialize welcomeContent position on load
+positionWelcomeContent();

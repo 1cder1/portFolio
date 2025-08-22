@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ninak's Profiel</title>
+    <title>Ninak's Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
 </head>
 <body>
-    
+
+    <div class="music-control">
+        <button onclick="document.getElementById('bg-music').play()"> Play Music</button>
+
+        <audio id="bg-music" loop>
+            <source src="SOUND/ProfileMUSIC.mp3" type="audio/mpeg">
+
+        </audio>
+    </div>
+
+<div class="page">
+  <img src="IMG/ProfileWELCOME.png" alt="Welcome" class="img-welcome">
+  <img src="IMG/ProfileABOUT.png" alt="About" class="img-about">
+  <img src="IMG/ProfileWORK.png" alt="Work" class="img-work">
+</div>
+
+<div class="welcome-content">
+    <img src="IMG/ProfilePROFILE.gif" alt="Profile" class="profile">
+    <img src="IMG/ProfileEXITBUTTON.png" alt="welcomeExit" class="welcome-exit">
+</div>
+
 </body>
 </html>
