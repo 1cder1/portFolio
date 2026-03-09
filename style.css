@@ -3,7 +3,7 @@ body {
   margin: 0;
   height: 100vh;
   font-family: sans-serif;
-  background: url('IMG/ProfileBK.gif') center/cover no-repeat;
+  /*background: url('IMG/ProfileBK.gif') center/cover no-repeat; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -11,28 +11,94 @@ body {
   overflow: hidden;
 }
 
-.music-control {
+.music-control button{
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 10;
 }
 
+
+/* Style for the music notes container */
+.music-notes {
+    position: absolute;
+    bottom: 180px; /* Place it near the bottom of the screen */
+    right: 100px;
+    transform: translateX(-50%);
+    display: none; /* Initially hidden */
+    font-size: 2rem;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
+.plu {
+    width: 150px;  /* Set image size, you can adjust this */
+    height: auto;  /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure the image maintains its aspect ratio */
+    background-color: transparent; /* No background color for the image */
+    border-radius: 10px; /* Optional: add rounded corners to the image */
+}
+
+/* Style for individual notes */
+.note {
+    position: absolute;
+    opacity: 0;
+    animation: moveNotes 2s infinite ease-in-out;
+}
+
+@keyframes moveNotes {
+    0% {
+        opacity: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateX(-50px) rotate(45deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-60px) rotate(90deg);
+    }
+}
+
+/* Spread out the notes randomly */
+.note:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.note:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.note:nth-child(3) {
+    animation-delay: 1s;
+}
+
+.welcomePage, .aboutPage, .workPage {
+    display: none; /* Hide all pages by default */
+}
+
+
 /* Welcome Page Styles */
 .welcomePage {
   position: relative; /* Make this container the reference point for positioning */
   width: 100%; /* Full width to cover the body */
   height: 100%; /* Full height to cover the body */
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
+
 }
 
 /* Image for the welcome background */
 .img-welcome {
-  width: 100%;
-  height: auto;
-  max-width: 360px;
+  width: 368px;
+  height: 388px;
   z-index: 1; /* Ensures the background image is behind the profile */
 }
 
@@ -46,6 +112,29 @@ body {
   z-index: 2; /* Ensure the profile image is on top of the background */
 }
 
+.about-button {
+    position: absolute; /* Absolute positioning within the welcomePage */
+    width: 135px;
+    height: auto;
+    cursor: pointer;
+    top: 67%; /* Vertical center */
+    left: 50%; /* Horizontal center */
+    transform: translate(-50%, -25%); /* Offset the profile image to truly center it */
+    z-index: 2; /* Ensure the profile image is on top of the background */
+}
+
+.work-button {
+    position: absolute; /* Absolute positioning within the welcomePage */
+    width: 130px;
+    height: auto;
+    top: 82%; /* Vertical center */
+    left: 50%; /* Horizontal center */
+    transform: translate(-50%, -25%); /* Offset the profile image to truly center it */
+    z-index: 2; /* Ensure the profile image is on top of the background */
+}
+
+
+
 .welcome-exit {
   position: absolute; /* Absolute positioning within the welcomePage */
   top: 9%; /* Vertical center */
@@ -53,6 +142,44 @@ body {
   transform: translate(-50%, -50%); /* Offset the profile image to truly center it */
   width: 25px;
   z-index: 2; /* Ensure the profile image is on top of the background */
+}
+
+
+.aboutPage {
+  position: relative; /* Make this container the reference point for positioning */
+  width: 100%; /* Full width to cover the body */
+  height: 100%; /* Full height to cover the body */
+  display: block;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.img-about {
+  width: 512px;
+  height: 386.5px;
+  z-index: 5; /* Ensures the background image is behind the profile */
+}
+
+
+.about-exit {
+  position: absolute; /* Absolute positioning within the welcomePage */
+  top: 9%; /* Vertical center */
+  left: 91%; /* Horizontal center */
+  transform: translate(-50%, -50%); /* Offset the profile image to truly center it */
+  width: 25px;
+  z-index: 2; /* Ensure the profile image is on top of the background */
+}
+
+.about-slidder {
+  position: absolute;
+  top: 26%; /* Vertical center */
+  left: 94.17%; /* Horizontal center */
+  transform: translate(-50%, -50%); /* Offset the profile image to truly center it */
+  width: 14px;
+  height: auto; /* Slider height */
+  cursor: pointer; /* Make it look draggable */
+  z-index: 99;
 }
 
 
